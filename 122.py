@@ -58,11 +58,32 @@ def countdown():
     if timer <= 0:
         counter.write("Game Over", font=font_setup)
         timer_up = True
+        manage_leaderboard()
     else:
         counter.write("Timer: " + str(timer), font=font_setup)
         timer -= 1
         counter.getscreen().ontimer(countdown, counter_interval) 
  
+
+# manages the leaderboard for top 5 scorers
+def manage_leaderboard():
+  
+  global leader_scores_list
+  global leader_names_list
+  global score
+  global Shelldon
+
+  # load all the leaderboard records into the lists
+  lb.load_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list)
+
+  # TODO
+  if (len(leader_scores_list) < 5 or score > leader_scores_list[4]):
+    lb.update_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list, player_name, score)
+    lb.draw_leaderboard(leader_names_list, leader_scores_list, True, Shelldon, score)
+
+  else:
+    lb.draw_leaderboard(leader_names_list, leader_scores_list, False, Shelldon, score)
+
 #--------Score display code----------
 Score_Display = trtl.Turtle(shape=turtleshape)
 Score_Display.color(turtlecolor)

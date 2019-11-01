@@ -1,21 +1,4 @@
-# manages the leaderboard for top 5 scorers
-def manage_leaderboard():
-  
-  global leader_scores_list
-  global leader_names_list
-  global score
-  global Shelldon
 
-  # load all the leaderboard records into the lists
-  lb.load_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list)
-
-  # TODO
-  if (len(leader_scores_list) < 5 or score > leader_scores_list[4]):
-    lb.update_leaderboard(leaderboard_file_name, leader_names_list, leader_scores_list, player_name, score)
-    lb.draw_leaderboard(leader_names_list, leader_scores_list, True, Shelldon, score)
-
-  else:
-    lb.draw_leaderboard(leader_names_list, leader_scores_list, False, Shelldon, score)
 
 #   leaderboard.py
 # The leaderboard module to be used in a122 solution.
@@ -38,19 +21,29 @@ def load_leaderboard(file_name, leader_names, leader_scores):
     index = 0
 
     # TODO 1: use a while loop to read the leader name from the line (format is "leader_name,leader_score")
+    
+    while (line[index] != ","):
+      leader_name = leader_name + line[index]
+      index = index + 1
+    print(leader_name)  
 
 
     # TODO 2: add the leader name to the list
-
+    leader_names.append(leader_name)
     
     # TODO 3: read the player score using a similar loop
-
+    index = index + 1
+    while (line[index] != "\n"):
+      leader_score = leader_score + line[index]
+      index = index + 1
+    print(leader_score)
     
     # TODO 4: add the player score to the list
-
+  leader_scores.append(int(leader_score))
 
   leaderboard_file.close()
 
+load_leaderboard("a122_leaderboard.txt",[],[])
 
 # update leaderboard by inserting the current player and score to the list at the correct position
 def update_leaderboard(file_name, leader_names, leader_scores, player_name, player_score):
