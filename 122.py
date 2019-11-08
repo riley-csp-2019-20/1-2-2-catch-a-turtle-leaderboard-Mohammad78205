@@ -9,9 +9,10 @@ turtleshape= "turtle"
 turtlecolor= "purple"
 turtlesize = 7
 
+
 score = 0
 
-timer = 5
+timer = 20
 counter_interval = 1000 
 timer_up = False
 
@@ -90,7 +91,7 @@ Score_Display.color(turtlecolor)
 Score_Display.shapesize(turtlesize)
 Score_Display.ht()
 Score_Display.pensize(10)
- 
+
 Score_Display.penup()
 Score_Display.goto(-440,350)
 Score_Display.pendown()
@@ -99,7 +100,7 @@ font_setup = ("Arial", 30, "bold")
 Score_Display.write(score, font = font_setup)
 
 #-------countdown-------------
-counter =  trtl.Turtle()
+counter = trtl.Turtle()
 counter.ht()
 counter.penup()
 counter.goto(-70,320)
